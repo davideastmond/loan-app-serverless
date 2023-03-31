@@ -1,3 +1,8 @@
 # Serverless Function
 
-- To be filled out
+# ENV Variables
+
+PORT=
+API_KEY=
+ADMIN_EMAIL=admin@avcdoloan.com
+ADMIN_EMAIL_PASSWORD=
