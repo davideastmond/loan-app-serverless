@@ -16,7 +16,7 @@ const html =
 
     <a href="<%= recoveryURL %>"><%= recoveryURL %></a>
     <p>Do not share this link with anyone else, as this can be used to gain control of your account.</p>
-    <p>If you have received this in error, please e-mail us at ${process.env.ADMIN_EMAIL}</p>
+    <p>If you have received this in error, please e-mail us at <%= adminEmail %></p>
 
   <footer>
     <p>Best regards,</p>
@@ -26,11 +26,11 @@ const html =
   </html>
 `
 
-export class PasswordRecoveryEmail extends BaseEmail {
-  constructor(recipient: string, name: string, recoveryURL: string) {
+class PasswordRecoveryEmail extends BaseEmail {
+  constructor(recipient: string, adminEmail: string,  name: string, recoveryURL: string) {
     const subject: string = `AVCDOLOAN Password recovery link`;
     const htmlBody = { 
-      html: ejs.render(html, { recoveryURL: recoveryURL, name: name } ), 
+      html: ejs.render(html, { recoveryURL: recoveryURL, name: name, adminEmail: adminEmail } ), 
       text: 
       `Hello, ${name}
 
@@ -39,7 +39,7 @@ export class PasswordRecoveryEmail extends BaseEmail {
 
       Do not share this link with anyone else, as this can be used to gain control of your account.
 
-      If you have received this in error, please e-mail us at ${process.env.ADMIN_EMAIL}
+      If you have received this in error, please e-mail us at ${adminEmail}
       Best regards,
       AVCDOLOAN Admin Team
       `
@@ -51,3 +51,5 @@ export class PasswordRecoveryEmail extends BaseEmail {
     )
   }
 }
+
+export default PasswordRecoveryEmail;
