@@ -3,10 +3,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv'
 import { BaseEmail } from '../../data/emails/base-email';
 
-interface IEmailSender {
-  sendEmail: (email: BaseEmail) => Promise<void>
-}
-export class Emailer implements IEmailSender {
+class Emailer {
   private sender: string;
   private transporter: any;
   constructor() {
@@ -36,3 +33,6 @@ export class Emailer implements IEmailSender {
     }
   }
 }
+
+const emailer = new Emailer();
+export { emailer };
