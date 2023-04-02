@@ -10,11 +10,11 @@ const html = `
     <title>Password Recovery E-mail</title>
   </head>
   <body>
-		<p>Hello, <%= name %></p>
-		<p>Thank you for registering for an AVCDOLOAN </p>
-		<p>We have received your application</p>
-		<p>Your application identification number is <%= applicationId %></p>
-		<p> Expect a response between 24-72 business hours.</p>
+    <p>Hello, <%= name %></p>
+    <p>Thank you for registering for an AVCDOLOAN </p>
+    <p>We have received your application</p>
+    <p>Your application identification number is <%= applicationId %></p>
+    <p> Expect a response between 24-72 business hours.</p>
 
     <p>If you have received this in error, please e-mail us at <$= adminEmail %><p>
   <footer>
@@ -29,24 +29,24 @@ class WelcomeEmail extends BaseEmail {
   constructor(recipient: string, name: string, applicationId: string, adminEmail: string) {
     const subject: string = "AVCDOLOAN Sign Up";
     const htmlBody = {
-			html: ejs.render(html, { name: name, applicationId: applicationId, adminEmail: adminEmail }),
-			text: 
-			`Hello${name}
-			Thank you for registering for an AVCDOLOAN 
-			We have received your application.
-			Your application identification number is ${applicationId}
-			Expect a response between 24-72 business hours.
+      html: ejs.render(html, { name: name, applicationId: applicationId, adminEmail: adminEmail }),
+      text: 
+      `Hello${name}
+      Thank you for registering for an AVCDOLOAN 
+      We have received your application.
+      Your application identification number is ${applicationId}
+      Expect a response between 24-72 business hours.
 
-			If you have received this in error, please e-mail us at ${adminEmail}
+      If you have received this in error, please e-mail us at ${adminEmail}
       Best regards,
       AVCDOLOAN Admin Team
-			`
-		};
-		super(
-			recipient,
-			subject,
-			htmlBody
-		)
+      `
+    };
+    super(
+      recipient,
+      subject,
+      htmlBody
+    )
   }
 }
 
