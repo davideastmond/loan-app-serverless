@@ -45,7 +45,6 @@ async function postSendWelcomeEmail(req: Request, res: Response) {
 async function postSendVerificationCodeEmail(req: Request, res: Response) {
   const { code, recipient } = req.body;
   try {
-    console.info(48, code, recipient);
     await emailer.sendEmail(new VerificationCodeEmail(recipient, code));
   } catch (err: any) {
     console.log(err)
