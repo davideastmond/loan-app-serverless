@@ -1,7 +1,6 @@
 import { BaseEmail } from "../base-email";
 import ejs from "ejs";
-const html =
-`
+const html = `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -16,7 +15,7 @@ const html =
 
     <a href="<%= recoveryURL %>"><%= recoveryURL %></a>
     <p>Do not share this link with anyone else, as this can be used to gain control of your account.</p>
-    <p>If you have received this in error, please e-mail us at ${process.env.ADMIN_EMAIL}</p>
+    <p>If you have received this in error, please e-mail us at <%= adminEmail %></p>
 
   <footer>
     <p>Best regards,</p>
@@ -24,30 +23,36 @@ const html =
   </footer>
   </body>
   </html>
-`
+`;
 
-export class PasswordRecoveryEmail extends BaseEmail {
-  constructor(recipient: string, name: string, recoveryURL: string) {
+class PasswordRecoveryEmail extends BaseEmail {
+  constructor(
+    recipient: string,
+    adminEmail: string,
+    name: string,
+    recoveryURL: string
+  ) {
     const subject: string = `AVCDOLOAN Password recovery link`;
-    const htmlBody = { 
-      html: ejs.render(html, { recoveryURL: recoveryURL, name: name } ), 
-      text: 
-      `Hello, ${name}
+    const htmlBody = {
+      html: ejs.render(html, {
+        recoveryURL: recoveryURL,
+        name: name,
+        adminEmail: adminEmail,
+      }),
+      text: `Hello, ${name}
 
       Here's your password reset link:
       ${recoveryURL}
 
       Do not share this link with anyone else, as this can be used to gain control of your account.
 
-      If you have received this in error, please e-mail us at ${process.env.ADMIN_EMAIL}
+      If you have received this in error, please e-mail us at ${adminEmail}
       Best regards,
       AVCDOLOAN Admin Team
-      `
-  };
-    super(
-      recipient,
-      subject,
-      htmlBody
-    )
+      `,
+    };
+    super(recipient, subject, htmlBody);
   }
 }
+
+export default PasswordRecoveryEmail;

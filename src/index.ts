@@ -1,4 +1,4 @@
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 dotenv.config();
 
 import express, { NextFunction, urlencoded } from "express";
@@ -6,17 +6,21 @@ import cors from "cors";
 import emailer from "./components/emailer/emailer.component";
 
 const app = express();
-const router = express.Router()
+const router = express.Router();
 const bodyParser = require("body-parser");
-app.use(cors())
+app.use(cors());
 
-app.use(cors({
-  origin: true
-}))
+app.use(
+  cors({
+    origin: true,
+  })
+);
 
-app.use(urlencoded({
-  extended: true
-}))
+app.use(
+  urlencoded({
+    extended: true,
+  })
+);
 
 // Validate API Key
 app.use((req: any, res: any, next: NextFunction) => {
@@ -33,7 +37,7 @@ app.use((req: any, res: any, next: NextFunction) => {
       err: "Invalid or missing API key",
     });
   }
-})
+});
 
 app.use(bodyParser.json());
 
@@ -42,6 +46,6 @@ emailer(router);
 app.use("/hooks", router);
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, ()=> {
-  console.info(`Server listening on port ${PORT}`)
-})
+app.listen(PORT, () => {
+  console.info(`Server listening on port ${PORT}`);
+});

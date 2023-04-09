@@ -1,12 +1,10 @@
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv'
-import { BaseEmail } from '../../data/emails/base-email';
+dotenv.config();
+import { BaseEmail } from "../../data/emails/base-email";
 
-interface IEmailSender {
-  sendEmail: (email: BaseEmail) => Promise<void>
-}
-export class Emailer implements IEmailSender {
+class Emailer {
   private sender: string;
   private transporter: any;
   constructor() {
@@ -17,22 +15,26 @@ export class Emailer implements IEmailSender {
       secure: true,
       auth: {
         user: process.env.ADMIN_EMAIL,
-        pass: process.env.ADMIN_EMAIL_PASSWORD
-      }
-    })
+        pass: process.env.ADMIN_EMAIL_PASSWORD,
+      },
+    });
   }
 
   // Send an e-mail
   async sendEmail(email: BaseEmail) {
     const emailObject = {
       from: this.sender,
-      ...email.getEmail()
-    }
+      ...email.getEmail(),
+    };
     try {
+      console.info("Timestamp: ", new Date().toISOString());
       const res = await this.transporter.sendMail(emailObject);
-      console.info(res)
+      console.info(res);
     } catch (err: any) {
       console.log(err);
     }
   }
 }
+
+const emailer = new Emailer();
+export { emailer };
