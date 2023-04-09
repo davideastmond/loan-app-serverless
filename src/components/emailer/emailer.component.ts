@@ -25,7 +25,7 @@ async function postSendPasswordChangedEmail(req: Request, res: Response) {
     return res.status(200).send({ msg: 'OK'});
   } catch (err: any) {
     return res.status(500).send({
-      err: err
+      err: 'Failed to send password changed e-mail request'
     })
   }
 }
@@ -37,7 +37,7 @@ async function postSendWelcomeEmail(req: Request, res: Response) {
     return res.status(200).send({ msg: 'OK'})
   } catch (err: any) {
     return res.status(500).send({
-      err: err
+      err: 'Failed to send welcome e-mail request'
     })
   }
 }
@@ -45,10 +45,12 @@ async function postSendWelcomeEmail(req: Request, res: Response) {
 async function postSendVerificationCodeEmail(req: Request, res: Response) {
   const { code, recipient } = req.body;
   try {
+    console.info(48, code, recipient);
     await emailer.sendEmail(new VerificationCodeEmail(recipient, code));
   } catch (err: any) {
+    console.log(err)
     return res.status(500).send({
-      err: err
+      err: 'Failed to send verification code e-mail request'
     })
   }
 }

@@ -1,6 +1,8 @@
 
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+
+dotenv.config();
 import { BaseEmail } from '../../data/emails/base-email';
 
 class Emailer {
@@ -26,6 +28,7 @@ class Emailer {
       ...email.getEmail()
     }
     try {
+      console.info("Timestamp: ", new Date().toISOString());
       const res = await this.transporter.sendMail(emailObject);
       console.info(res)
     } catch (err: any) {
