@@ -9,12 +9,10 @@
   },
   "javascript.validate.enable": false,
   "files.eol": "\n",
-  "cSpell.words": [
-
-  ],
+  "cSpell.words": [],
   "jestrunner.debugOptions": {
     "args": ["--no-cache"],
     "sourcemaps": "inline",
-    "disableOptimisticBPs": true,
+    "disableOptimisticBPs": true
   }
 }

@@ -7,5 +7,5 @@ export {
   PasswordChangedEmail,
   PasswordRecoveryEmail,
   WelcomeEmail,
-  VerificationCodeEmail
-}
+  VerificationCodeEmail,
+};

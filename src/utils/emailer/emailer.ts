@@ -1,9 +1,8 @@
-
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
 dotenv.config();
-import { BaseEmail } from '../../data/emails/base-email';
+import { BaseEmail } from "../../data/emails/base-email";
 
 class Emailer {
   private sender: string;
@@ -16,21 +15,21 @@ class Emailer {
       secure: true,
       auth: {
         user: process.env.ADMIN_EMAIL,
-        pass: process.env.ADMIN_EMAIL_PASSWORD
-      }
-    })
+        pass: process.env.ADMIN_EMAIL_PASSWORD,
+      },
+    });
   }
 
   // Send an e-mail
   async sendEmail(email: BaseEmail) {
     const emailObject = {
       from: this.sender,
-      ...email.getEmail()
-    }
+      ...email.getEmail(),
+    };
     try {
       console.info("Timestamp: ", new Date().toISOString());
       const res = await this.transporter.sendMail(emailObject);
-      console.info(res)
+      console.info(res);
     } catch (err: any) {
       console.log(err);
     }

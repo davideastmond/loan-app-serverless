@@ -1,5 +1,5 @@
-import ejs from 'ejs';
-import { BaseEmail } from '../base-email';
+import ejs from "ejs";
+import { BaseEmail } from "../base-email";
 const html = `
 <!DOCTYPE html>
   <html lang="en">
@@ -23,15 +23,23 @@ const html = `
   </footer>
   </body>
   </html>
-`
+`;
 
 class WelcomeEmail extends BaseEmail {
-  constructor(recipient: string, name: string, applicationId: string, adminEmail: string) {
+  constructor(
+    recipient: string,
+    name: string,
+    applicationId: string,
+    adminEmail: string
+  ) {
     const subject: string = "AVCDOLOAN Sign Up";
     const htmlBody = {
-      html: ejs.render(html, { name: name, applicationId: applicationId, adminEmail: adminEmail }),
-      text: 
-      `Hello${name}
+      html: ejs.render(html, {
+        name: name,
+        applicationId: applicationId,
+        adminEmail: adminEmail,
+      }),
+      text: `Hello${name}
       Thank you for registering for an AVCDOLOAN 
       We have received your application.
       Your application identification number is ${applicationId}
@@ -40,13 +48,9 @@ class WelcomeEmail extends BaseEmail {
       If you have received this in error, please e-mail us at ${adminEmail}
       Best regards,
       AVCDOLOAN Admin Team
-      `
+      `,
     };
-    super(
-      recipient,
-      subject,
-      htmlBody
-    )
+    super(recipient, subject, htmlBody);
   }
 }
 

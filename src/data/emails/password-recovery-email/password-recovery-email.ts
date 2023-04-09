@@ -1,7 +1,6 @@
 import { BaseEmail } from "../base-email";
 import ejs from "ejs";
-const html =
-`
+const html = `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -24,15 +23,23 @@ const html =
   </footer>
   </body>
   </html>
-`
+`;
 
 class PasswordRecoveryEmail extends BaseEmail {
-  constructor(recipient: string, adminEmail: string,  name: string, recoveryURL: string) {
+  constructor(
+    recipient: string,
+    adminEmail: string,
+    name: string,
+    recoveryURL: string
+  ) {
     const subject: string = `AVCDOLOAN Password recovery link`;
-    const htmlBody = { 
-      html: ejs.render(html, { recoveryURL: recoveryURL, name: name, adminEmail: adminEmail } ), 
-      text: 
-      `Hello, ${name}
+    const htmlBody = {
+      html: ejs.render(html, {
+        recoveryURL: recoveryURL,
+        name: name,
+        adminEmail: adminEmail,
+      }),
+      text: `Hello, ${name}
 
       Here's your password reset link:
       ${recoveryURL}
@@ -42,13 +49,9 @@ class PasswordRecoveryEmail extends BaseEmail {
       If you have received this in error, please e-mail us at ${adminEmail}
       Best regards,
       AVCDOLOAN Admin Team
-      `
-  };
-    super(
-      recipient,
-      subject,
-      htmlBody
-    )
+      `,
+    };
+    super(recipient, subject, htmlBody);
   }
 }
 

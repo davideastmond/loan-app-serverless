@@ -1,6 +1,6 @@
 import { BaseEmail } from "../base-email";
 import ejs from "ejs";
-const html: string =`
+const html: string = `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -20,27 +20,22 @@ const html: string =`
   </footer>
   </body>
   </html>
-`
+`;
 
 class PasswordChangedEmail extends BaseEmail {
   constructor(recipient: string, name: string) {
     const subject: string = "AVCDOLOAN Account password changed";
     const htmlBody = {
       html: ejs.render(html, { name: name }),
-      text: 
-      `Hello, ${name}
+      text: `Hello, ${name}
       The password for your account has been updated
 
       If you have received this in error, please e-mail us at ${process.env.ADMIN_EMAIL}
       Best regards,
       AVOCDOLOAN Admin Team
-      `
+      `,
     };
-    super (
-      recipient,
-      subject,
-      htmlBody
-    )
+    super(recipient, subject, htmlBody);
   }
 }
 

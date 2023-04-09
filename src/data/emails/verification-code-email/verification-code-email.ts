@@ -1,5 +1,5 @@
-import ejs from 'ejs';
-import { BaseEmail } from '../base-email';
+import ejs from "ejs";
+import { BaseEmail } from "../base-email";
 const html = `
 <!DOCTYPE html>
   <html lang="en">
@@ -30,15 +30,14 @@ const html = `
   </footer>
   </body>
   </html>
-`
+`;
 
 class VerificationCodeEmail extends BaseEmail {
   constructor(recipient: string, code: string) {
     const subject: string = "AVCDOLOAN Verify your E-mail address";
     const htmlBody = {
       html: ejs.render(html, { code: code }),
-      text:
-      `
+      text: `
       Hello,
       Thank you for starting an application with AVCDOLOAN.
       Use this verification code to confirm your e-mail address:
@@ -47,9 +46,9 @@ class VerificationCodeEmail extends BaseEmail {
       
       Best regards,
       AVCDOLOAN Admin Team
-      `
-    }
-    super(recipient, subject, htmlBody)
+      `,
+    };
+    super(recipient, subject, htmlBody);
   }
 }
 
